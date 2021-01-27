@@ -1,10 +1,11 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const Contact = (props) => {
-    const {contact} = props;
+    const {dialog} = props;
     return (
         <div>
-            <span>{contact.name}</span>
+            <Link to={`/message/${dialog.id}`}>{dialog.name}</Link>
         </div>
     )
 }
