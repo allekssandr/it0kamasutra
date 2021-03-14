@@ -1,6 +1,7 @@
 import React from "react";
 import s from './Navbar.module.css';
 import {Link} from "react-router-dom";
+import FriendsBar from "./FriendsBar/FriendsBar";
 
 const Navbar = (props) => {
     return (
@@ -20,6 +21,7 @@ const Navbar = (props) => {
             <div className={s.item}>
                 <Link to={'/'}>Settings</Link>
             </div>
+            <FriendsBar friends={props.state.sidebar.friendsBar}/>
         </div>
     )
 }

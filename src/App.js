@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
-import Header from "./Component/Header/Header";
-import Navbar from "./Component/Navbar/Navbar";
-import Content from "./Component/Content/Content";
+import Header from "./component/Header/Header";
+import Navbar from "./component/Navbar/Navbar";
+import Content from "./component/Content/Content";
 import {BrowserRouter} from "react-router-dom";
 
 
-function App() {
+function App(props) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar/>
-                <Content/>
+                <Navbar state={props.state}/>
+                <Content state={props.state} addPost={props.addPost}/>
             </div>
         </BrowserRouter>
     );
