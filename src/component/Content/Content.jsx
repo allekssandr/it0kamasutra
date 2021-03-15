@@ -8,7 +8,11 @@ const Content = (props) => {
     return (
         <div className={s.content}>
             <Route path={'/profile'} render={() =>
-                <Profile state={props.state.profilePage} addPost={props.addPost}/>}
+                <Profile
+                    state={props.state.profilePage}
+                    addPost={props.addPost}
+                    updateNewPostText={props.updateNewPostText}
+                />}
             />
             <Route path={'/message'} render={() =>
                 <Dialogs state={props.state.dialogsPage}/>}
