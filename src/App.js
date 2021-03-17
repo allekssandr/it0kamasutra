@@ -12,8 +12,7 @@ function App(props) {
                 <Navbar state={props.state}/>
                 <Content
                     state={props.state}
-                    addPost={props.addPost}
-                    updateNewPostText={props.updateNewPostText}
+                    dispatch={props.dispatch}
                 />
             </div>
     );
