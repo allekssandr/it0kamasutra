@@ -1,0 +1,58 @@
+.user {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    border-bottom: 1px solid #94f1f1;
+}
+
+.user:last-child {
+    border-bottom: none;
+}
+
+.userFollow {
+    margin: 20px;
+}
+
+.userDescription {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-flow: column;
+    margin: 20px 40px;
+}
+
+.avatar {
+    text-align: center;
+}
+
+.avatar img {
+    width: 50px;
+    border-radius: 90px;
+}
+
+.fullName {
+    font-size: large;
+    font-weight: bold;
+}
+
+.status {
+    font-size: smaller;
+    color: #676060;
+    grid-row: 3;
+}
+
+.locationCountry {
+    font-weight: bold;
+    text-align: right;
+}
+
+.locationCity {
+    font-weight: bold;
+    text-align: right;
+}
+
+.btnFollow {
+    width: 100px;
+    height: 25px;
+    margin-top: 10px;
+}
+

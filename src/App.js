@@ -9,11 +9,8 @@ function App(props) {
     return (
             <div className="app-wrapper">
                 <Header/>
-                <Navbar state={props.state}/>
-                <Content
-                    state={props.state}
-                    dispatch={props.dispatch}
-                />
+                <Navbar />
+                <Content />
             </div>
     );
 }

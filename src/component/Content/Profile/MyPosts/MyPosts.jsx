@@ -4,15 +4,13 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../../
 
 const MyPosts = (props) => {
 
-    let newPostElement = React.createRef();
-
-    let addPost = () => {
-        props.dispatch(addPostActionCreator());
+    let onAddPost = () => {
+        props.addPost();
     }
 
     const onPostChange = (event) => {
         const {value} = event.target;
-        props.dispatch(updateNewPostTextActionCreator(value));
+        props.updateNewMyPost(value);
     }
 
     return (
@@ -20,11 +18,10 @@ const MyPosts = (props) => {
             <div>
                 <textarea
                     onChange={onPostChange}
-                    ref={newPostElement}
                     name={'newPost'}
                     value={props.newPostText}
                 />
-                <button onClick={addPost}>Add post</button>
+                <button onClick={onAddPost}>Add post</button>
             </div>
             <div>
                 {
