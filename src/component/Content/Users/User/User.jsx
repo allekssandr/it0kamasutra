@@ -7,11 +7,11 @@ const User = (props) => {
     let {user} = props;
 
     const onFollow = () => {
-        props.setFollowUser(user.id);
+        props.follow(user.id);
     }
 
     const onUnfollow = () => {
-        props.setUnfollowUser(user.id);
+        props.unfollow(user.id);
     }
 
 

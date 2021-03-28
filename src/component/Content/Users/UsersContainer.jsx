@@ -1,59 +1,31 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    follow,
+    follow, getUsers,
     setCount,
     setCountPages,
     setCurrentPage, setTotalUsersCount,
-    setUsers, toggleFollowInProgress, toggleIsFetching, toggleIsProgress,
-    unfollow
+    setUsers, unfollow
 } from "../../../redux/users-reducer";
-import axios from "axios";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
-import {followUser, getUsers, unfollowUser} from "../../../api/api";
+import {usersAPI} from "../../../api/api";
 
 class UsersContainer extends React.Component {
-    setFollowUser = (userId) => {
-        this.props.toggleFollowInProgress(userId, true);
-        followUser(userId)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    this.props.follow(userId);
-                    this.props.toggleFollowInProgress(userId, false);
-                }
-            })
-    }
-
-    setUnfollowUser = (userId) => {
-        this.props.toggleFollowInProgress(userId, true);
-        unfollowUser(userId)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    this.props.unfollow(userId);
-                    this.props.toggleFollowInProgress(userId, false);
-                }
-            })
-    }
 
     handleSetCurrentPage = (event) => {
         const {innerHTML} = event.target;
         this.props.setCurrentPage(innerHTML);
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${innerHTML}&count=${this.props.count}`)
-            .then(users => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(users.data.items);
-            })
+
+        usersAPI.getUsers(innerHTML, this.props.count).then(users => {
+            this.props.toggleIsFetching(false);
+            this.props.setUsers(users.items);
+        })
     }
 
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        getUsers(this.props.currentPage, this.props.count).then(users => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(users.items);
-            this.props.setTotalUsersCount(users.totalCount);
-        });
+        this.props.getUsers(this.props.currentPage, this.props.count);
     }
 
     createPagination = () => {
@@ -82,8 +54,6 @@ class UsersContainer extends React.Component {
                     users={this.props.users}
                     follow={this.props.follow}
                     unfollow={this.props.unfollow}
-                    setFollowUser={this.setFollowUser}
-                    setUnfollowUser={this.setUnfollowUser}
                     followInProgress={this.props.followInProgress}
                 />
             </>
@@ -103,35 +73,6 @@ const mapStateToProps = (state) => (
     }
 );
 
-/*const mapDispatchToProps = (dispatch) => (
-    {
-        follow: (idUser) => {
-            dispatch(followAC(idUser));
-        },
-        unfollow: (idUser) => {
-            dispatch(unfollowAC(idUser));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        setCountPages: (countPages) => {
-            dispatch(setCountPagesAC(countPages));
-        },
-        setCurrentPage: (currentPage) => {
-            dispatch(setCurrentPageAC(currentPage));
-        },
-        setCount: (count) => {
-            dispatch(setCountAC(count));
-        },
-        setTotalUsersCount: (totalUsersCount) => {
-            dispatch(setTotalUsersCountAC(totalUsersCount));
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingAC(isFetching));
-        }
-    }
-)*/
-
 export default connect(mapStateToProps, {
-    follow, unfollow, setUsers, setCountPages, setCurrentPage, setCount, setTotalUsersCount, toggleIsFetching, toggleFollowInProgress
+    follow, unfollow, setUsers, setCountPages, setCurrentPage, setCount, setTotalUsersCount, getUsers,
 })(UsersContainer);
