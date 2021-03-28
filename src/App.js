@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import Header from "./component/Header/Header";
 import Navbar from "./component/Navbar/Navbar";
 import Content from "./component/Content/Content";
+import HeaderContainer from "./component/Header/HeaderContainer";
 
 
 function App(props) {
     return (
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainer/>
                 <Navbar />
                 <Content />
             </div>

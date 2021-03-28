@@ -1,0 +1,11 @@
+.avatarUser {
+    width: 20%;
+    border-radius: 90px;
+    text-align: center;
+}
+
+.avatarUser>img {
+    border-radius: 90px;
+    position: relative;
+    left:0;
+}
